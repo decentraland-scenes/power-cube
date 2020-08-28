@@ -27,7 +27,6 @@ const powerDown = new Sound(new AudioClip("sounds/powerDown.mp3"))
 
 // Power base where the power cube sits
 export class PowerBase extends Entity {
-  isPowerOn: boolean = true
 
   constructor(model: GLTFShape, transform: Transform) {
     super()
@@ -43,19 +42,17 @@ export class PowerBase extends Entity {
         null,
         1, // Triggered by layer 1 triggers i.e. the power cube
         () => {
-          this.isPowerOn = true
-          this.togglePower()
+          this.togglePower(true)
         },
         () => {
-          this.isPowerOn = false
-          this.togglePower()
+          this.togglePower(false)
         }
       )
     )
   }
 
-  togglePower() {
-    if (this.isPowerOn) {
+  togglePower(isPowerOn: boolean) {
+    if (isPowerOn) {
       powerBlueGlow.getComponent(Transform).scale.setAll(1)
       engine.addEntity(forcefield)
       forcefieldParticles = engine.addSystem(new ParticleSystem())
@@ -69,7 +66,6 @@ export class PowerBase extends Entity {
       engine.removeEntity(forcefield)
       engine.removeSystem(forcefieldParticles)
       powerDown.getComponent(AudioSource).playOnce()
-
     }
   }
 }

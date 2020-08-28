@@ -10,7 +10,6 @@ engine.addEntity(staticBase)
 
 // Configuration
 const Z_OFFSET = 1.5
-const POWER_BASE_HEIGHT = 0.7
 const GROUND_HEIGHT = 0.55
 
 // Scene objects
@@ -45,6 +44,6 @@ Input.instance.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, (e) => {
     transform.lookAt(Camera.instance.position)
     transform.rotation.x = 0
     transform.rotation.z = 0
-    powerBase.isPowerOn ? transform.position.y = POWER_BASE_HEIGHT : transform.position.y = GROUND_HEIGHT
+    transform.position.y = GROUND_HEIGHT
   }
 })
