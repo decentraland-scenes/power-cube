@@ -32,7 +32,7 @@ Input.instance.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, (e) => {
     transform.position = Vector3.Zero()
     transform.rotation = Quaternion.Zero()
     transform.position.z += Z_OFFSET
-    powerCube.setParent(Attachable.PLAYER)
+    powerCube.setParent(Attachable.AVATAR)
   } else {
     powerCube.isGrabbed = false
     cubePutDownSound.getComponent(AudioSource).playOnce()
