@@ -1,4 +1,4 @@
-import utils from "../node_modules/decentraland-ecs-utils/index"
+import * as utils from '@dcl/ecs-scene-utils'
 
 export class PowerCube extends Entity {
   isGrabbed: boolean = false
@@ -8,18 +8,15 @@ export class PowerCube extends Entity {
     engine.addEntity(this)
     this.addComponent(model)
     this.addComponent(transform)
-    
+
     this.addComponent(
-      new OnPointerDown(
-        () => {},
-        {
-          button: ActionButton.PRIMARY,
-          hoverText: "Pick Up / Put Down",
-          distance: 5
-        }
-      )
+      new OnPointerDown(() => {}, {
+        button: ActionButton.PRIMARY,
+        hoverText: 'Pick Up / Put Down',
+        distance: 5,
+      })
     )
     let triggerBox = new utils.TriggerBoxShape(Vector3.One(), Vector3.Zero())
-    this.addComponent(new utils.TriggerComponent(triggerBox, 1)) // Note: Trigger layer 1
+    this.addComponent(new utils.TriggerComponent(triggerBox, { layer: 1 }))
   }
 }
