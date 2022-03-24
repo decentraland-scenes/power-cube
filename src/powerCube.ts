@@ -13,10 +13,10 @@ export class PowerCube extends Entity {
       new OnPointerDown(() => {}, {
         button: ActionButton.PRIMARY,
         hoverText: 'Pick Up / Put Down',
-        distance: 5,
+        distance: 5
       })
     )
-    let triggerBox = new utils.TriggerBoxShape(Vector3.One(), Vector3.Zero())
+    const triggerBox = new utils.TriggerBoxShape(Vector3.One(), Vector3.Zero())
     this.addComponent(new utils.TriggerComponent(triggerBox, { layer: 1 }))
   }
 }

@@ -1,9 +1,14 @@
 // Particles
-@Component("particle")
+@Component('particle')
 export class Particle {
   life = Math.random()
   seed = Math.random() * this.width
-  constructor(public width: number, public height: number, public speed: number, public parentTransform: Entity) {}
+  constructor(
+    public width: number,
+    public height: number,
+    public speed: number,
+    public parentTransform: Entity
+  ) {}
 }
 
 export const particleGroup = engine.getComponentGroup(Particle)
@@ -17,7 +22,11 @@ export class ParticleSystem {
       particle.life += dt * particle.speed // Particle speed
       particle.life %= 1 // Reset particle life
 
-      transform.position.set(0, particle.life * particle.height, 0 - particle.seed)
+      transform.position.set(
+        0,
+        particle.life * particle.height,
+        0 - particle.seed
+      )
       entity.setParent(particle.parentTransform) // Transform particles using parent's transform
     }
   }
@@ -36,7 +45,7 @@ const particleTransform = new Entity()
 particleTransform.addComponent(
   new Transform({
     position: new Vector3(16, 0, 10),
-    rotation: Quaternion.Euler(0, 90, 0),
+    rotation: Quaternion.Euler(0, 90, 0)
   })
 )
 engine.addEntity(particleTransform)
@@ -49,7 +58,12 @@ for (let i = 0; i < MAX_PARTICLES; i++) {
   particle.addComponent(shape)
   particle.addComponent(material)
   particle.addComponent(new Particle(16, 7, 0.25, particleTransform))
-  particle.addComponent(new Transform({ rotation: Quaternion.Euler(0, 90, 0), scale: new Vector3(0.01, 0.1, 1) }))
+  particle.addComponent(
+    new Transform({
+      rotation: Quaternion.Euler(0, 90, 0),
+      scale: new Vector3(0.01, 0.1, 1)
+    })
+  )
   engine.addEntity(particle)
   particles.push(particle)
 }

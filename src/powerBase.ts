@@ -33,7 +33,7 @@ export class PowerBase extends Entity {
     this.addComponent(model)
     this.addComponent(transform)
 
-    let triggerBox = new utils.TriggerBoxShape(
+    const triggerBox = new utils.TriggerBoxShape(
       new Vector3(4, 4, 4),
       new Vector3(0, 2, 0)
     )
@@ -46,7 +46,7 @@ export class PowerBase extends Entity {
         },
         onTriggerExit: () => {
           this.togglePower(false)
-        },
+        }
       })
     )
   }

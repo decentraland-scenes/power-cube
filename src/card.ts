@@ -28,7 +28,7 @@ export class Card extends Entity {
           },
           onCameraExit: () => {
             engine.removeEntity(this)
-          },
+          }
         }
       )
     )

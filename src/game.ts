@@ -1,11 +1,11 @@
-import { Card } from "./card"
-import { PowerBase } from "./powerBase"
-import { PowerCube } from "./powerCube"
-import { Sound } from "./sound"
+import { Card } from './card'
+import { PowerBase } from './powerBase'
+import { PowerCube } from './powerCube'
+import { Sound } from './sound'
 
 // Base
 const staticBase = new Entity()
-staticBase.addComponent(new GLTFShape("models/staticBase.glb"))
+staticBase.addComponent(new GLTFShape('models/staticBase.glb'))
 engine.addEntity(staticBase)
 
 // Configuration
@@ -13,17 +13,26 @@ const Z_OFFSET = 1.5
 const GROUND_HEIGHT = 0.55
 
 // Scene objects
-const card = new Card(new GLTFShape("models/card.glb"), new Transform({ position: new Vector3(8, 1.5, 13.5) }))
-const powerBase = new PowerBase(new GLTFShape("models/powerBase.glb"), new Transform(new Transform({ position: new Vector3(8, 0.024, 3.5) })))
-const powerCube = new PowerCube(new GLTFShape("models/powerCube.glb"), new Transform({ position: new Vector3(8, GROUND_HEIGHT, 3.5) }))
+const card = new Card(
+  new GLTFShape('models/card.glb'),
+  new Transform({ position: new Vector3(8, 1.5, 13.5) })
+)
+const powerBase = new PowerBase(
+  new GLTFShape('models/powerBase.glb'),
+  new Transform(new Transform({ position: new Vector3(8, 0.024, 3.5) }))
+)
+const powerCube = new PowerCube(
+  new GLTFShape('models/powerCube.glb'),
+  new Transform({ position: new Vector3(8, GROUND_HEIGHT, 3.5) })
+)
 
 // Sounds
-const cubePickUpSound = new Sound(new AudioClip("sounds/cubePickup.mp3"))
-const cubePutDownSound = new Sound(new AudioClip("sounds/cubePutDown.mp3"))
+const cubePickUpSound = new Sound(new AudioClip('sounds/cubePickup.mp3'))
+const cubePutDownSound = new Sound(new AudioClip('sounds/cubePutDown.mp3'))
 
 // Controls
-Input.instance.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, (e) => {
-  let transform = powerCube.getComponent(Transform)
+Input.instance.subscribe('BUTTON_DOWN', ActionButton.PRIMARY, false, (e) => {
+  const transform = powerCube.getComponent(Transform)
   if (!powerCube.isGrabbed) {
     powerCube.isGrabbed = true
     cubePickUpSound.getComponent(AudioSource).playOnce()
@@ -39,7 +48,9 @@ Input.instance.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, (e) => {
 
     // Calculate power cube's ground position
     powerCube.setParent(null) // Remove parent
-    let forwardVector: Vector3 = Vector3.Forward().scale(Z_OFFSET).rotate(Camera.instance.rotation)
+    const forwardVector: Vector3 = Vector3.Forward()
+      .scale(Z_OFFSET)
+      .rotate(Camera.instance.rotation)
     transform.position = Camera.instance.position.clone().add(forwardVector)
     transform.lookAt(Camera.instance.position)
     transform.rotation.x = 0
